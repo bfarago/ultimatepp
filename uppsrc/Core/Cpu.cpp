@@ -8,6 +8,7 @@
 #include <sys/vmmeter.h>
 #endif
 #ifdef PLATFORM_MACOS
+#include <sys/sysctl.h>
 #include <mach/mach.h>
 #include <mach/vm_statistics.h>
 #endif

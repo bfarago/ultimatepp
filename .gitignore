@@ -1,0 +1,5 @@
+
+*.o
+*.a
+.cache/upp.out/build_info.h
+*.bak

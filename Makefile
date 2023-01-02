@@ -1,13 +1,13 @@
 UPPDIR1 = ./uppsrc/
 
 UPPOUT = .cache/upp.out/
-CINC   =  -I$(UPPDIR1) `pkg-config --cflags freetype2` `pkg-config --cflags fontconfig` `pkg-config --cflags x11` `pkg-config --cflags xcb` `pkg-config --cflags expat` `pkg-config --cflags libpng` `pkg-config --cflags xinerama` `pkg-config --cflags xrender` `pkg-config --cflags xft` `pkg-config --cflags xdmcp` `pkg-config --cflags xext` `pkg-config --cflags gtk+-3.0` `pkg-config --cflags libnotify` -I./ -I$(UPPOUT)
+CINC   =  -I$(UPPDIR1)         `pkg-config --cflags expat` `pkg-config --cflags libpng`               -I./ -I$(UPPOUT)
 Macro  =  -DflagGUI -DflagGCC -DflagSHARED -DflagPOSIX -DflagLINUX
 CXX = c++
 LINKER = $(CXX)
 CFLAGS = -O3 -ffunction-sections -fdata-sections 
 CXXFLAGS = -O3 -ffunction-sections -fdata-sections  -std=c++14
-LDFLAGS = -Wl,--gc-sections $(LINKOPTIONS)
+LDFLAGS = $(LINKOPTIONS)
 LIBPATH =
 AR = ar -sr
 
@@ -260,7 +260,7 @@ $(OutFile): build_info  \
 	$(OutDir_plugin_bmp)BmpReg.o \
 	$(OutDir_plugin_bmp)bmp.a \
 	$(OutDir_RichText)RichText.a
-	$(LINKER) -o "$(OutFile)" -Wl,-s $(LIBPATH) -Wl,-O,2 $(LDFLAGS) -Wl,--start-group  \
+	$(LINKER) -o "$(OutFile)" $(LIBPATH) $(LDFLAGS)  \
 		$(OutDir_ide)BaseDlg.o \
 		$(OutDir_ide)SelectPkg.o \
 		$(OutDir_ide)UppWspc.o \
@@ -376,10 +376,10 @@ $(OutFile): build_info  \
 		$(OutDir_plugin_bmp)BmpReg.o \
 			$(OutDir_plugin_bmp)bmp.a \
 			$(OutDir_RichText)RichText.a \
-			`pkg-config --libs freetype2` \
-			`pkg-config --libs fontconfig` \
-			`pkg-config --libs x11` \
-			`pkg-config --libs xcb` \
+			  \
+			  \
+			  \
+			  \
 			`pkg-config --libs expat` \
 			`pkg-config --libs libpng` \
 			`pkg-config --libs xinerama` \
@@ -394,8 +394,8 @@ $(OutFile): build_info  \
 			-lssl \
 			-lpthread \
 			-ldl \
-			-lrt \
-			-lz -Wl,--end-group
+			 \
+			-lz  
 
 $(OutDir_ide):
 	mkdir -p $(OutDir_ide)

@@ -1,13 +1,13 @@
 UPPDIR1 = ./uppsrc/
 
 UPPOUT = .cache/upp.out/
-CINC   =  -I$(UPPDIR1) `pkg-config --cflags libpng` `pkg-config --cflags freetype2` `pkg-config --cflags fontconfig` `pkg-config --cflags x11` `pkg-config --cflags xcb` `pkg-config --cflags expat` -I./ -I$(UPPOUT)
+CINC   =  -I$(UPPDIR1) `pkg-config --cflags libpng`         `pkg-config --cflags expat` -I./ -I$(UPPOUT)
 Macro  =  -DflagGCC -DflagSHARED -DflagPOSIX -DflagLINUX
 CXX = c++
 LINKER = $(CXX)
 CFLAGS = -O3 -ffunction-sections -fdata-sections 
 CXXFLAGS = -O3 -ffunction-sections -fdata-sections  -std=c++14
-LDFLAGS = -Wl,--gc-sections $(LINKOPTIONS)
+LDFLAGS = $(LINKOPTIONS)
 LIBPATH =
 AR = ar -sr
 
@@ -89,7 +89,7 @@ $(OutFile): build_info  \
 	$(OutDir_plugin_zstd)zstd.a \
 	$(OutDir_Core)Core.a \
 	$(OutDir_plugin_pcre)pcre.a
-	$(LINKER) -o "$(OutFile)" -Wl,-s $(LIBPATH) -Wl,-O,2 $(LDFLAGS) -Wl,--start-group  \
+	$(LINKER) -o "$(OutFile)" $(LIBPATH) $(LDFLAGS)  \
 		$(OutDir_umk)Console.o \
 		$(OutDir_umk)IdeContext.o \
 		$(OutDir_umk)MakeBuild.o \
@@ -110,16 +110,16 @@ $(OutFile): build_info  \
 			$(OutDir_Core)Core.a \
 			$(OutDir_plugin_pcre)pcre.a \
 			`pkg-config --libs libpng` \
-			`pkg-config --libs freetype2` \
-			`pkg-config --libs fontconfig` \
-			`pkg-config --libs x11` \
-			`pkg-config --libs xcb` \
+			  \
+			  \
+			  \
+			  \
 			`pkg-config --libs expat` \
 			-lbz2 \
 			-lpthread \
 			-ldl \
-			-lrt \
-			-lz -Wl,--end-group
+			 \
+			-lz  
 
 $(OutDir_umk):
 	mkdir -p $(OutDir_umk)
